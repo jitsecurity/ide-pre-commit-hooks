@@ -1,4 +1,4 @@
-- id: vscode-jit
+- id: vscode
   name: VSCode Jit
   description: Checks if there are new security issues that Jit IDE Extension found
   entry: vscode
