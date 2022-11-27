@@ -26,11 +26,12 @@ def main():
 
     # read json file /tmp/controls/.precommit/ + cwd_hash + .state.json
     with open('/tmp/controls/.precommit/' + cwd_hash + '.state.json', 'r') as json_file:
-        findings = json.load(json_file)
+        state = json.load(json_file)
 
     # c = GitLeaks(os.getcwd(), args.filenames)
     # c.run_container()
     # findings = c.get_relevant_findings()
+    findings = state.get('findings', [])
     if findings:
         print(f"Found {len(findings)} findings")
         exit(1)
