@@ -1,3 +1,4 @@
+import json
 import argparse
 import os
 import sys
@@ -24,11 +25,18 @@ def main():
     with open(cwd_hash, 'w') as f:
         f.write(cwd_hash)
 
+    # read json file /tmp/controls/.precommit/ + cwd_hash + .state.json
+    with open('/tmp/controls/.precommit/' + cwd_hash + '.state.json', 'r') as json_file:
+        findings = json.load(json_file)
+
     # c = GitLeaks(os.getcwd(), args.filenames)
     # c.run_container()
     # findings = c.get_relevant_findings()
-    # if findings:
-    #     exit(1)
+    if findings:
+        print(f"Found {len(findings)} findings")
+        exit(1)
+    
+    print(f"Found {len(findings)} findings")
     # exit(0)
     exit(1)
 
