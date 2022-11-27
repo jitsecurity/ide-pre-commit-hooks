@@ -18,6 +18,11 @@ def main():
     # md5 hex digest cwd
     cwd_hash = hashlib.md5(cwd.encode('utf-8')).hexdigest()
     print(cwd_hash)
+    print("GUYYYYY2")
+
+    # create a file with the hash
+    with open(cwd_hash, 'w') as f:
+        f.write(cwd_hash)
 
     # c = GitLeaks(os.getcwd(), args.filenames)
     # c.run_container()
