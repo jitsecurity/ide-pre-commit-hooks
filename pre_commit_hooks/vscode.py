@@ -3,7 +3,6 @@ import argparse
 import os
 import sys
 import hashlib
-print()# from pre_commit_hooks.utils.controls import GitLeaks
 
 
 def main():
