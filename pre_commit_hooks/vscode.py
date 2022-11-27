@@ -29,7 +29,8 @@ def main():
     # findings = c.get_relevant_findings()
     # if findings:
     #     exit(1)
-    exit(0)
+    # exit(0)
+    exit(1)
 
 
 if __name__ == "__main__":
