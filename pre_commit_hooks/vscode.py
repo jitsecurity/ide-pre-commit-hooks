@@ -15,7 +15,9 @@ def main():
         findings = state.get("findings", [])
         configuration = state.get("configuration", [])
         if configuration:
+            print(f"Before filter {len(findings)} findings")
             findings = filter_findings(findings, configuration)
+            print(f"Before filter {len(findings)} findings")
 
     print(f"Found {len(findings)} findings")
     if findings:
