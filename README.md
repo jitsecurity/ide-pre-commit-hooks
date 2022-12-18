@@ -1,4 +1,4 @@
-# IDE Extension pre-commit hooks
+# Jit IDE Extension pre-commit hooks
 A set of pre-commit hooks to use along with the IDE Extension.
 
 ## Getting Started
