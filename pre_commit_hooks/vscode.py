@@ -4,7 +4,7 @@ import hashlib
 
 
 def filter_findings(findings, configuration):
-    return list(filter(lambda finding: finding["controlName"] not in configuration, findings))
+    return list(filter(lambda finding: finding["controlName"] in configuration, findings))
 
 
 def main():
