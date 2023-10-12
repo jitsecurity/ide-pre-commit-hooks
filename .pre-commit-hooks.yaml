@@ -3,9 +3,8 @@
   description: Checks if there are new security issues that Jit IDE Extension found
   entry: vscode
   language: python
-# - id: kics
-#   name: run kics
-#   description: run kics on the current commit
-#   entry: kics
-#   language: python
-#   files: (\.tf)$
+- id: gitleaks
+  name: Run GitLeaks
+  description: Detect secrets on the current commit
+  entry: gitleaks
+  language: python
