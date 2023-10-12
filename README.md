@@ -14,7 +14,25 @@ You can configure the pre-commit hook by modifying the parameters in the IDE Ext
 
 <details>
     <summary>Click to expand Jit Docker Login Script</summary>
-  
+    <br/>
+
+
+**Copy the following script to a file named `jit-docker-login.sh` and run it in your terminal. This script will log you in to the Jit Docker registry and pull the relevant docker images.**
+
+**Pre-requisites:**
+- **jq - https://jqlang.github.io/jq/download/**
+```bash
+brew install jq
+```
+
+-  **Docker up and running**
+
+- **Jit Platform credentials**
+    Go to https://platform.jit.io and -> under Settings > Users and Permissions, go to API Tokens, and create a token with an appropriate name and member role. Make sure to copy the values.
+    - **Client ID**
+    - **Client Secret**
+
+**Script:**
 ```bash
     #!/bin/bash
 
