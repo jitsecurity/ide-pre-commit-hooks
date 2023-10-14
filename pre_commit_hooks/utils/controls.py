@@ -41,7 +41,6 @@ class Control:
         return f
 
     def create_findings_dir(self) -> None:
-        # let any program create file in this dir
         os.makedirs(self.base_findings_path_raw, exist_ok=True)
         os.makedirs(self.base_findings_path, exist_ok=True)
 
