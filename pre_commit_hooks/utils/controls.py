@@ -13,6 +13,7 @@ class Control:
     base_findings_path = "/tmp/controls/.pre_commit_findings"
     base_findings_path_raw = "/tmp/controls/.raw_pre_commit_findings"
     security_control_output_file = ""
+    log_file = "/tmp/controls/jit-standalone-pre-commit.log"
 
     def __init__(self, base_path, changed_files: List[str]):
         self.base_path = base_path
@@ -87,9 +88,12 @@ class Control:
         volumes_list = []
         for volume in self.container_params["volumes"]:
             volumes_list.extend(["-v", volume])
+        env_list = []
+        for k, v in self.container_params["environment"].items():
+            env_list.extend(["-e", f"{k}={v}"])
         command = (
-            ["docker", "run"]
-            + [f"-e {k}={v}" for k, v in self.container_params["environment"].items()]
+            ["docker", "run", "--rm"]
+            + env_list
             + volumes_list
             + [self.image, *self.command]
         )
@@ -97,17 +101,17 @@ class Control:
             command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
         )
         stdout, stderr = process.communicate()
-        with open("/tmp/controls/log", "w") as f:
+        with open(self.log_file, "w") as f:
             f.write(
                 f'Stdout: {stdout.decode("utf-8")}\nStderr{stderr.decode("utf-8")}\n'
             )
+        print(f"Finished running {self.control_name}\n")
+        print(f"If there is an error check the log file {self.log_file}")
 
 
 class GitLeaks(Control):
     control_name = "gitleaks"
-    # image = "ghcr.io/jit-hackathon-secured-ide/jit-gitleaks-control"
     image = "899025839375.dkr.ecr.us-east-1.amazonaws.com/jit-ide:jit-gitleaks-control"
-    # image = "registry.jit.io/jit-ide:jit-gitleaks-control"
 
     security_control_output_file = "/tmp/controls/report.json"
     command = [
@@ -131,7 +135,6 @@ class GitLeaks(Control):
 
 class Kics(Control):
     control_name = "kics"
-    # image = "ghcr.io/jit-hackathon-secured-ide/jit-kics-control:latest"
     image = "899025839375.dkr.ecr.us-east-1.amazonaws.com/jit-ide:jit-kics-control"
     security_control_output_file = "/tmp/controls/kics/jit-report/results.json"
     command = [
